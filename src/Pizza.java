@@ -6,12 +6,10 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return "Pizza{" +
-                "pizzaID=" + pizzaID +
-                ", pizzaName='" + pizzaName + '\'' +
-                ", pizzaToppings='" + pizzaToppings + '\'' +
-                ", pizzaPrice=" + pizzaPrice +
-                '}';
+        return pizzaID+". "+
+                pizzaName+" - "+
+                pizzaToppings+
+                "\t\tDKK " + pizzaPrice + ",-";
     }
 
     public Pizza(int pizzaID, String pizzaName, String pizzaToppings, int pizzaPrice) {

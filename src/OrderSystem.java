@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class OrderSystem {
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<Orders> ordersArrayList = new ArrayList<>();
-    static boolean validation = true;
 
+    static boolean validation = true;
     public static void main(String[] args) {
+        fillMenuArrayListFromTxtFile();
         boolean validation1 = true;
         boolean validation2 = true;
         boolean validation3 = true;
@@ -65,18 +65,18 @@ public class OrderSystem {
                 int choice = getIntegerInput();
                 do {
                     if (choice == 1) {
-                        showPizzaMenu();
-                        validation2=false;
+                        printWholePizzaMenu();
+                        validation2 = false;
                     } else if (choice == 2) {
                         printAllOrders();
-                        validation2=false;
+                        validation2 = false;
                     } else {
                         System.out.println(userInfo);
-                        validation2=true;
+                        validation2 = true;
 
                     }
-                }while(!validation2);
-                validation1=false;
+                } while (!validation2);
+                validation1 = false;
 
             } else if (marioOrAlfredo == 2) {
                 System.out.println(alfredoInfo);
@@ -85,47 +85,44 @@ public class OrderSystem {
 
                     if (choice == 1) {
                         addOrder();
-                        validation3=false;
+                        validation3 = false;
 
                     } else if (choice == 2) {
                         removeOrder();
-                        validation3=false;
+                        validation3 = false;
 
                     } else {
                         System.out.println(userInfo);
-                        validation3=true;
+                        validation3 = true;
                     }
                     choice = getIntegerInput();
-                }while (!validation3);
-                validation1=false;
+                } while (!validation3);
+                validation1 = false;
 
             } else {
-                validation1=false;
+                validation1 = false;
             }
 
-        }while(!validation1);
-
-        System.out.println("Hej");
-
-
+        } while (!validation1);
     }
+
     public static int getIntegerInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
+    static ArrayList<Orders> ordersArrayList = new ArrayList<>();
     public static void addOrder() {
-        Pizza hawaii = new Pizza(1,"Hawaii","onion",59);
-        Pizza pepperoni = new Pizza(2,"Pepperoni","Cheese",78);
-        Pizza[] newOrder = {hawaii,pepperoni};
+        Pizza hawaii = new Pizza(1, "Hawaii", "onion", 59);
+        Pizza pepperoni = new Pizza(2, "Pepperoni", "Cheese", 78);
+        Pizza[] newOrder = {hawaii, pepperoni};
         Orders nyeOrdre = new Orders(newOrder);
         ordersArrayList.add(nyeOrdre);
 
-        Pizza trippleCheese = new Pizza(3,"Tripple Cheese ","Cheese",100);
+        Pizza trippleCheese = new Pizza(3, "Tripple Cheese ", "Cheese", 100);
         Pizza[] jensOrder = {trippleCheese};
         Orders nyereOrdre = new Orders(jensOrder);
         ordersArrayList.add(nyereOrdre);
-
 
 
         printAllOrders();
@@ -136,7 +133,7 @@ public class OrderSystem {
         printAllOrders();
         System.out.println("Choose which pizza to remove from order list");
         int userInput = scanner.nextInt();
-        ordersArrayList.remove(userInput-1);
+        ordersArrayList.remove(userInput - 1);
 
     }
     public static void printAllOrders() {
@@ -146,21 +143,59 @@ public class OrderSystem {
         }
     }
 
-    public static void showPizzaMenu() {
-
+    //Primarily Jens's code
+    //Code responsible for creating Pizza menu and pulling pizzas from it
+    static ArrayList<Pizza> menu = new ArrayList<>();
+    private static void fillMenuArrayListFromTxtFile(){
         try {
-            File myObj = new File("src\\pizza.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                System.out.println(data);
+            File pizzaMenuTxt = new File("src\\PIZZA.txt");
+            Scanner scanner = new Scanner(pizzaMenuTxt);
+            while (scanner.hasNextLine()) {
+                String menuRaw = scanner.nextLine();
+                //Splits each line of pizzas by '.' to an array
+                String[] nextPizzaFromRawMenu = menuRaw.split("\\.");
+                //Parses strings pizzaID and pizzaPrice to integers
+                int pizzaID = Integer.parseInt(nextPizzaFromRawMenu[0]);
+                int pizzaPrice = Integer.parseInt(nextPizzaFromRawMenu[3]);
+                //Creates pizza from each line of pizza values
+                Pizza nextPizza = new Pizza(pizzaID, nextPizzaFromRawMenu[1], nextPizzaFromRawMenu[2], pizzaPrice);
+                //Adds pizza to global menu
+                menu.add(nextPizza);
             }
-            myReader.close();
+            scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            try {//For MacOS - has different path to file, therefore catches exception and tries for MacOS path
+                File pizzaMenu = new File("src/PIZZA.txt");
+                Scanner scanner = new Scanner(pizzaMenu);
+                while (scanner.hasNextLine()) {
+                    String menuRaw = scanner.nextLine();
+                    //Splits each line of pizzas into strings by '.' to an array
+                    String[] pizza = menuRaw.split("\\.");
+                    //Parses strings pizzaID and pizzaPrice to integers
+                    int pizzaID = Integer.parseInt(pizza[0]);
+                    int pizzaPrice = Integer.parseInt(pizza[3]);
+                    //Creates pizza from each line of pizza values
+                    Pizza nextPizza = new Pizza(pizzaID, pizza[1], pizza[2], pizzaPrice);
+                    menu.add(nextPizza);
+                }
+                scanner.close();
+                //if neither
+            } catch (FileNotFoundException f) {
+                System.out.println("An error occurred.");
+            }
         }
     }
-
+    private static void printPizzaFromMenu(int pizzaID){
+        //turns menu to an array which we can use Pizza methods on
+        Pizza[] pizzasArray = menu.toArray(new Pizza[menu.size()]);
+        System.out.println(pizzasArray[pizzaID-1].toString());
+    }
+    private static void printWholePizzaMenu(){
+        //Prints out all Pizzas on the menu, will also be helpful when getting statistics from a day of sales
+        Pizza[] pizzasArray = menu.toArray(new Pizza[menu.size()]);
+        for (int i = 0; i < pizzasArray.length; i++) {
+            System.out.println(pizzasArray[i].toString());
+        }
+    }
 }
 
