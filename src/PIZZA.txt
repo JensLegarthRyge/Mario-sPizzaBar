@@ -1,0 +1,38 @@
+1.MARGHERITA.Tomat,ost.55
+2.VESUVIO.Skinke.62
+3.CAPRICCIOSA.Skinke, champignon.65
+4.HAWAII.Skinke, ananas.65
+5.QUATRO STAGIONI.Skinke, champignon, artiskok, pepperoni.70
+6.PEPPERONI.Pepperoni.62
+7.AMORE.Skinke, champignon, artiskok.73
+8.ITALIANA.Kødsauce, løg.65
+9.GORGONZOLA.Champignon, løg, gorgonzola.70
+10.FUNGHI.Champignon, oliven.63
+11.SICILIANA.Oliven, capers, ansjoser.70
+12.VICHINGA.Skinke, champignon, peberfrugt, chili, hvidløg.70
+13.LORIK.Kødstrimler, champignon, gorgonzola.75
+14.ECSOTICA.Skinke, rejer, ananas.73
+15.ROSSINI.Skinke, pepperoni, bacon, cocktailpølser.77
+16.SARDENA.Cocktailpølser, bacon, løg, æg.75
+17.MISTTA.Skinke, pepperoni.68
+18.SOLE.Skinke, bacon, æg.70
+19.LEIF´S.Parmaskinke, høvlet parmesanost, rucolasalat, pestodressing.77
+20.TORIO.Pepperoni, champignon.68
+21.TINA.Kødstrimler, champignon, løg, peberfrugt, chili, dressing.77
+22.VEGETARIANA.Champignon, løg, peberfrugt, asparges.68
+23.FLORIM.Champignon, løg, peberfrugt, kylling.75
+24.ANTONELO.Skinke, kødsauce, cocktailpølser.75
+25.NØRREBRO.Shawarma, salat, dressing.70
+26.PECORINO.Asparges, artiskok, fetaost.70
+27.PAESANA.Skinke, panchetta, (italiensk bacon).68
+28.MARINARA.Alt godt fra havet.70
+29.TONA.Tun, løg.70
+30.MATADOR.Oksefilet, champignon, løg, bearnaisesauce.80
+31.PARMA.Gorgonzola, parmaskinke.75
+32.CALZONE (INDBAGT).Skinke, champignon.67
+33.CALZONE SPECIEL (INDBAGT).Kødsauce, spaghetti.70
+34.LABI.Bresaola, rucola, parmesan, semidried tomater, pesto.83
+35.KARTOFFEL.Kartoffel, bacon, pesto.75
+36.ÆGIRS.Babyspinat, gorgonzola, parmaskinke.77
+37.MIMER´S.Stærk italiensk salami, semidried tomater, baby spinat, pesto.80
+38.CALABRIA.Stærk italiensk salami, rucola, parmesanost, pesto, cherry tomater.80
