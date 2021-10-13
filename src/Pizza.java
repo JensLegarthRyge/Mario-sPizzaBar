@@ -10,6 +10,15 @@ public class Pizza {
         this.pizzaToppings = pizzaToppings;
         this.pizzaPrice = pizzaPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "pizzaID=" + pizzaID +
+                ", pizzaName='" + pizzaName + '\'' +
+                ", pizzaToppings='" + pizzaToppings + '\'' +
+                ", pizzaPrice=" + pizzaPrice +
+                '}';
+    }
 }
 
-//s
