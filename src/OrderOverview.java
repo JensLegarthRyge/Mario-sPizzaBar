@@ -1,10 +1,7 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class OrderOverview extends OrderSystem{
-    public static void main(String[] args) {
-        System.out.println("");
+public class OrderOverview {
 
-
-    }
 
 }
