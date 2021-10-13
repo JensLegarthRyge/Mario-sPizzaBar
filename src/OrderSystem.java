@@ -143,8 +143,7 @@ public class OrderSystem {
         }
     }
 
-    //Primarily Jens's code
-    //Code responsible for creating Pizza menu and pulling pizzas from it
+    //Primarily Jens's code - Code responsible for creating Pizza menu and pulling pizzas from it
     static ArrayList<Pizza> menu = new ArrayList<>();
     private static void fillMenuArrayListFromTxtFile(){
         try {
