@@ -51,7 +51,7 @@ public class OrderSystem {
             System.out.println("\n" + marioInfo + "\n");
             int marioChoice = getIntegerInput();
             if (marioChoice == 1) {
-                printWholePizzaMenu();
+                printPizzaMenu();
             } else if (marioChoice == 2) {
                 printAllOrders();
             } else if (marioChoice == 3) {
@@ -161,12 +161,12 @@ public class OrderSystem {
             }
         }
     }
-    private static void printPizzaFromMenu(int pizzaID){
+    private static String getPizzaFromMenu(int pizzaID){
         //turns menu to an array which we can use Pizza methods on
         Pizza[] pizzasArray = menu.toArray(new Pizza[menu.size()]);
-        System.out.println(pizzasArray[pizzaID-1].toString());
+        return pizzasArray[pizzaID-1].toString();
     }
-    private static void printWholePizzaMenu(){
+    private static void printPizzaMenu(){
         //Prints out all Pizzas on the menu, will also be helpful when getting statistics from a day of sales
         Pizza[] pizzasArray = menu.toArray(new Pizza[menu.size()]);
         for (int i = 0; i < pizzasArray.length; i++) {
