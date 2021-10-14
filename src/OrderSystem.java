@@ -11,7 +11,7 @@ public class OrderSystem {
     public static void main(String[] args) {
         fillMenuArrayListFromTxtFile();
 
-        //chooseUser();
+       chooseUser();
 
     }
 
@@ -89,15 +89,26 @@ public class OrderSystem {
 
     public static void addOrder() {
         boolean loopChecker = true;
-        Pizza[] pizzasArray = menu.toArray(new Pizza[menu.size()]);
         printPizzaMenu();
-        System.out.println("Enter the pizza that has been ordered");
-        int chosenPizzaID = getIntegerInput();
-        System.out.println("When should it be finished by?");
-        Date pizzaFinishTime = getFinishedByTime();
-        Orders nextOrder = new Orders(getPizzaFromMenu(chosenPizzaID),pizzaFinishTime);
-        ordersArrayList.add(nextOrder);
-        while (loopChecker) {
+        System.out.println("\nTo enter the pizza that has been ordered, press 1\nTo go back press 2");
+
+        do {
+            int choice = getIntegerInput();
+            if (choice == 1) {
+                System.out.println("Please provide pizza number:");
+                int chosenPizzaID = getIntegerInput();
+                System.out.println(getPizzaFromMenu(chosenPizzaID));
+                System.out.println("When should it be finished by?");
+                Date pizzaFinishTime = getFinishedByTime();
+                Orders nextOrder = new Orders(getPizzaFromMenu(chosenPizzaID), pizzaFinishTime);
+                ordersArrayList.add(nextOrder);
+                System.out.println("Would you like to enter another order? Press 1 for Yes. 2 for No");
+            } else if (choice == 2) {
+                loopChecker = false;
+            }else {
+                System.out.println("Please enter 1 or 2");
+            }
+            /*
             System.out.println("Would you like to enter another order? Press 1 for Yes. 2 for No");
             int choice2 = getIntegerInput();
             if (choice2 == 1) {
@@ -112,7 +123,9 @@ public class OrderSystem {
             } else {
                 System.out.println("Please enter 1 or 2");
             }
-        }
+
+             */
+        }while (loopChecker);
     }
     public static void removeOrder() {
         boolean loopChecker = true;
