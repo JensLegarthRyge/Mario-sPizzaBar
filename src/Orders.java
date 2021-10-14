@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Date;
 public class Orders {
     private Pizza pizzaOrdered;
@@ -13,8 +12,13 @@ public class Orders {
 
     @Override
     public String toString() {
-        String minutes ="";
-        minutes=(finishedByTime.getMinutes()).
-        return finishedByTime.getHours()+":"+minutes+pizzaOrdered;
+        int minutes = finishedByTime.getMinutes();
+        StringBuilder stringbuilder = new StringBuilder();
+        if (minutes<10){
+            stringbuilder.append(0).append(minutes);
+        } else
+            stringbuilder.append(minutes);
+
+        return finishedByTime.getHours()+":"+stringbuilder+" - "+pizzaOrdered;
     }
 }
