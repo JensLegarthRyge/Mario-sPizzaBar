@@ -81,45 +81,71 @@ public class OrderSystem {
 
     }
 
+    public static void addOrder() {
+        boolean loopChecker = true;
+        Pizza[] pizzasArray = menu.toArray(new Pizza[menu.size()]);
+        printWholePizzaMenu();
+        System.out.println("Enter the pizza that have been ordered");
+        int choice = getIntegerInput();
+        ordersArrayList.add(pizzasArray[choice - 1]);
+        System.out.println(ordersArrayList.toString());
+        while (loopChecker) {
+            System.out.println("Would you like to enter another order? Press 1 for Yes. 2 for No");
+            int choice2 = getIntegerInput();
+            if (choice2 == 1) {
+                System.out.println("Enter the pizza that have been ordered");
+                int choice3 = getIntegerInput();
+                ordersArrayList.add(pizzasArray[choice3 - 1]);
+                System.out.println(ordersArrayList.toString());
+            } else if (choice2 == 2) {
+                loopChecker = false;
+            } else {
+                System.out.println("Please enter 1 or 2");
+            }
+        }
+    }
+    public static void removeOrder() {
+        boolean loopChecker = true;
+        System.out.println("Choose which pizza to remove from order list");
+        System.out.println(ordersArrayList.toString());
+        int choice = getIntegerInput();
+        while (choice >= ordersArrayList.size()+1 || choice <= 0) {
+            System.out.println("Please enter valid input");
+            choice = getIntegerInput();
+        }
+        System.out.println("Pizza removed :" + ordersArrayList.get(choice-1));
+        ordersArrayList.remove(choice - 1);
+        while (loopChecker) {
+            System.out.println("Would you like to remove another pizza? 1 for Yes. 2 for No");
+            int choice2 = getIntegerInput();
+            if (choice2 == 1) {
+                System.out.println("Choose which pizza to remove from order list");
+                System.out.println(ordersArrayList.toString());
+                while (choice2 >= ordersArrayList.size()+1 || choice2 <= 0) {
+                    System.out.println("Please enter try again");
+                    choice2 = getIntegerInput();
+                }
+                ordersArrayList.remove(choice - 1);
+            } else if (choice2 == 2) {
+                loopChecker = false;
+            } else {
+                System.out.println("Please enter 1 or 2");
+            }
+        }
+    }
+
     public static int getIntegerInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    static ArrayList<Orders> ordersArrayList = new ArrayList<>();
+    static ArrayList<Pizza> ordersArrayList = new ArrayList<Pizza>();
     static ArrayList<Orders> bookingKeepingArrayList = new ArrayList<>();
-    public static void addOrder() {
-        /*
-        Pizza hawaii = new Pizza(1, "Hawaii", "onion", 59);
-        Pizza pepperoni = new Pizza(2, "Pepperoni", "Cheese", 78);
-        Pizza[] newOrder = {hawaii, pepperoni};
-        Orders nyeOrdre = new Orders(newOrder);
-        ordersArrayList.add(nyeOrdre);
-
-        Pizza trippleCheese = new Pizza(3, "Tripple Cheese ", "Cheese", 100);
-        Pizza[] jensOrder = {trippleCheese};
-        Orders nyereOrdre = new Orders(jensOrder);
-        ordersArrayList.add(nyereOrdre);
-
-         */
-        System.out.println("How many pizzas would you like to add to the order? ");
 
 
-
-        printAllOrders();
-
-
-    }
-    public static void removeOrder() {
-        printAllOrders();
-        System.out.println("Choose which pizza to remove from order list");
-        int userInput = scanner.nextInt();
-        ordersArrayList.remove(userInput - 1);
-
-    }
     public static void printAllOrders() {
-        Orders[] ordersInArrayList = ordersArrayList.toArray(new Orders[ordersArrayList.size()]);
-        for (Orders orders : ordersInArrayList) {
+        Pizza[] ordersInArrayList = ordersArrayList.toArray(new Pizza[ordersArrayList.size()]);
+        for (Pizza orders : ordersInArrayList) {
             System.out.println(orders.toString());
         }
     }
@@ -177,5 +203,7 @@ public class OrderSystem {
             System.out.println(pizzasArray[i].toString());
         }
     }
+
+
 }
 
