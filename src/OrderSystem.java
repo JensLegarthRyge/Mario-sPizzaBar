@@ -54,7 +54,10 @@ public class OrderSystem {
                 printPizzaMenu();
             } else if (marioChoice == 2) {
                 printAllOrders();
+
             } else if (marioChoice == 3) {
+                statistics();
+            } else if (marioChoice == 4) {
                 validation = true;
             } else {
                 System.out.println("\nPlease press 1, 2 or 3 \n");
@@ -149,7 +152,6 @@ public class OrderSystem {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-
     public static Date getFinishedByTime(){
         System.out.println("hh:mm");
         String dateFromUser = getStringInput();
@@ -162,6 +164,10 @@ public class OrderSystem {
             e.printStackTrace();
         }
         return formattedDate;
+
+    }
+    //Primarily Mads's code - code responsible for statistics
+    public static void statistics() {
 
     }
 
