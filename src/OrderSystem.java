@@ -6,104 +6,81 @@ import java.util.Scanner;
 
 public class OrderSystem {
     static Scanner scanner = new Scanner(System.in);
-
     static boolean validation = true;
     public static void main(String[] args) {
         fillMenuArrayListFromTxtFile();
-        boolean validation1 = true;
-        boolean validation2 = true;
-        boolean validation3 = true;
-        String userInfo = "Press 1 for Marios user \nPress 2 for Alfredo's user \nPress 3 to exit program \n";
-        String alfredoInfo = "Press 1 to add order \nPress 2 to remove order \nPress 3 to go back \n";
-        String marioInfo = "Press 1 for menu card \nPress 2 for orders list \nPress 3 to go back \n";
 
+        chooseUser();
+
+    }
+
+    public static void chooseUser() {
+        String userInfo = "Press 1 for Marios user \nPress 2 for Alfredo's user \nPress 3 to exit program \n";
         System.out.println(userInfo);
 
-        int marioOrAlfredo = getIntegerInput();
-        /*
-        while (marioOrAlfredo !=3) {
-            outofloop:
-            if (marioOrAlfredo == 1) {
-                System.out.println(marioInfo);
-                int choice = getIntegerInput();
-                while (choice !=3) {
-                    if (choice == 1) {
-                        showPizzaMenu();
-                    } else if (choice == 2) {
-                        printAllOrders();
-                    } else {
-                        System.out.println(marioInfo);
-                        break outofloop;
-                    }
-                }
-            } else if (marioOrAlfredo == 2) {
-                System.out.println(alfredoInfo);
-                int choice = getIntegerInput();
-                while (choice != 3) {
-
-                    if (choice == 1) {
-                        addOrder();
-
-                    } else if (choice == 2) {
-                        removeOrder();
-
-                    } else {
-                        System.out.println("Closing program");
-                        break outofloop;
-                    }
-                    System.out.println(alfredoInfo);
-                    choice = getIntegerInput();
-                }
-            }
-        }
-
-         */
+        int marioOrAlfredo;
 
         do {
+            marioOrAlfredo = getIntegerInput();
+            validation = false;
             if (marioOrAlfredo == 1) {
-                System.out.println(marioInfo);
-                int choice = getIntegerInput();
-                do {
-                    if (choice == 1) {
-                        printWholePizzaMenu();
-                        validation2 = false;
-                    } else if (choice == 2) {
-                        printAllOrders();
-                        validation2 = false;
-                    } else {
-                        System.out.println(userInfo);
-                        validation2 = true;
-
-                    }
-                } while (!validation2);
-                validation1 = false;
-
-            } else if (marioOrAlfredo == 2) {
-                System.out.println(alfredoInfo);
-                int choice = getIntegerInput();
-                do {
-
-                    if (choice == 1) {
-                        addOrder();
-                        validation3 = false;
-
-                    } else if (choice == 2) {
-                        removeOrder();
-                        validation3 = false;
-
-                    } else {
-                        System.out.println(userInfo);
-                        validation3 = true;
-                    }
-                    choice = getIntegerInput();
-                } while (!validation3);
-                validation1 = false;
-
+                marioProgram();
+                System.out.println(userInfo);
+            }
+            else if (marioOrAlfredo == 2) {
+                alfredoProgram();
+                System.out.println(userInfo);
+            } else if (marioOrAlfredo == 3) {
+                System.out.println("Exiting program");
+                validation = false;
             } else {
-                validation1 = false;
+                System.out.println("\nPlease enter 1, 2 or 3\n");
+                System.out.println(userInfo);
+
             }
 
-        } while (!validation1);
+
+        } while (validation);
+    }
+
+    public static void marioProgram() {
+
+        String marioInfo = "Press 1 for menu card \nPress 2 for orders list \nPress 3 to go back \n";
+        System.out.println("Welcome Mario");
+        do {
+            System.out.println("\n" + marioInfo + "\n");
+            int marioChoice = getIntegerInput();
+            if (marioChoice == 1) {
+                printWholePizzaMenu();
+            } else if (marioChoice == 2) {
+                printAllOrders();
+            } else if (marioChoice == 3) {
+                validation = true;
+            } else {
+                System.out.println("\nPlease press 1, 2 or 3 \n");
+            }
+        } while (!validation);
+
+    }
+
+    public static void alfredoProgram() {
+        String alfredoInfo = "Press 1 to add order \nPress 2 to remove order \nPress 3 to go back \n";
+        System.out.println("Welcome Alfredo");
+        do {
+            System.out.println("\n" + alfredoInfo + "\n");
+            int alfredoChoice = getIntegerInput();
+
+            if (alfredoChoice == 1) {
+                addOrder();
+            } else if (alfredoChoice == 2) {
+                removeOrder();
+            } else if (alfredoChoice == 3) {
+                validation = true;
+            } else {
+                System.out.println("\nPlease press 1, 2 or 3 \n");
+            }
+        }while (!validation);
+
     }
 
     public static int getIntegerInput() {
