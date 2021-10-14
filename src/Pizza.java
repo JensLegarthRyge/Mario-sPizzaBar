@@ -20,5 +20,17 @@ public class Pizza {
 
 
     }
+
+    public int getPizzaPrice() {
+        return pizzaPrice;
+    }
+
+    public int getPizzaID() {
+        return pizzaID;
+    }
+
+    public String getPizzaName() {
+        return pizzaName;
+    }
 }
 

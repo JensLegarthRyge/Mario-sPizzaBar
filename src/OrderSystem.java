@@ -2,6 +2,10 @@ import java.time.*;
 import java.util.*;
 import java.text.*;
 import java.io.*;
+import java.util.stream.Collectors;
+import java.util.stream.*;
+
+
 
 public class OrderSystem {
     static Scanner scanner = new Scanner(System.in);
@@ -45,7 +49,7 @@ public class OrderSystem {
     }
     public static void marioProgram() {
 
-        String marioInfo = "Press 1 for menu card \nPress 2 for orders list \nPress 3 to go back \n";
+        String marioInfo = "Press 1 for menu card \nPress 2 for orders list \nPress 3 to see statistics \nPress 4 to go back\n";
         System.out.println("Welcome Mario");
         do {
             System.out.println("\n" + marioInfo + "\n");
@@ -168,7 +172,61 @@ public class OrderSystem {
     }
     //Primarily Mads's code - code responsible for statistics
     public static void statistics() {
+        boolean loopChecker = true;
+        Pizza[] statisticsOnPizzas = statisticsArrayList.toArray(new Pizza[0]);
+        double dataset[] = new double[statisticsOnPizzas.length];
 
+        for (int i = 0; i < statisticsOnPizzas.length; i++) {
+            dataset[i] = statisticsOnPizzas[i].getPizzaPrice();
+        }
+        DoubleSummaryStatistics stats = DoubleStream.of(dataset).summaryStatistics();
+        double amountOfPizzasSold = stats.getCount();
+        double sumOfPizzaRevenue = stats.getSum();
+
+
+        do {
+            System.out.println("\nTo see basic statistics about the revenue of today's sales, press 1\n" +
+                    "To see the most popular pizza today, press 2 \nTo go back, press 3");
+            int choice = getIntegerInput();
+            if (choice == 1) {
+                System.out.println("This is the amount of pizzas that were sold today: " + amountOfPizzasSold);
+                System.out.println("\nThis is the revenue from the pizzas sold: " + sumOfPizzaRevenue + "\n");
+            } else if (choice == 2) {
+                mostPopularPizza(statisticsOnPizzas);
+            } else if (choice == 3) {
+                loopChecker = false;
+            }
+
+        }while (loopChecker);
+
+    }
+    public static void mostPopularPizza(Pizza[] statisticsOnPizzas) {
+        double pizzaList[] = new double[statisticsOnPizzas.length];
+        for (int i = 0; i < statisticsOnPizzas.length; i++) {
+            pizzaList[i] = statisticsOnPizzas[i].getPizzaID();
+        }
+
+        //https://dev.to/habeebcycle/performing-basic-stats-in-java-8-5dfl
+        //A code that makes use of java.util.Stream. With Stream you can take input and process it, which is what the
+        //following code is doing.
+        //Here we make use of Map to make a sort of a histogram that can take the numbers of pizzaList[] and count how
+        //many times each pizza is sold.
+        Map<Double,Long> visualRepresentation = DoubleStream.of(pizzaList).boxed().collect(Collectors.groupingBy(e -> e,Collectors.counting()));
+
+        for (Double data : visualRepresentation.keySet()) {
+            System.out.println(data + " : " + visualRepresentation.get(data) + " : " + getStars(visualRepresentation.get(data)));
+
+        }
+
+
+
+    }
+    public static String getStars (long number) {
+        String output = "";
+        for (int i = 1; i <= number; i++) {
+            output += " * ";
+        }
+        return output;
     }
 
     //Primarily Jens's code - Code responsible for creating Pizza menu and pulling pizzas from it
