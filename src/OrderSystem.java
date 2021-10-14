@@ -38,8 +38,6 @@ public class OrderSystem {
                 System.out.println(userInfo);
 
             }
-
-
         } while (validation);
     }
 
@@ -89,7 +87,9 @@ public class OrderSystem {
     }
 
     static ArrayList<Orders> ordersArrayList = new ArrayList<>();
+    static ArrayList<Orders> bookingKeepingArrayList = new ArrayList<>();
     public static void addOrder() {
+        /*
         Pizza hawaii = new Pizza(1, "Hawaii", "onion", 59);
         Pizza pepperoni = new Pizza(2, "Pepperoni", "Cheese", 78);
         Pizza[] newOrder = {hawaii, pepperoni};
@@ -100,6 +100,10 @@ public class OrderSystem {
         Pizza[] jensOrder = {trippleCheese};
         Orders nyereOrdre = new Orders(jensOrder);
         ordersArrayList.add(nyereOrdre);
+
+         */
+        System.out.println("How many pizzas would you like to add to the order? ");
+
 
 
         printAllOrders();
