@@ -84,20 +84,18 @@ public class OrderSystem {
 
     //Primarily Christoffer's  code - Code responsible for Alfredos order system
     static ArrayList<Orders> ordersArrayList = new ArrayList<>();
-    static ArrayList<Orders> bookingKeepingArrayList = new ArrayList<>();
-
-
+    static ArrayList<Pizza> statisticsArrayList = new ArrayList<>();
     public static void addOrder() {
         boolean loopChecker = true;
         printPizzaMenu();
         System.out.println("\nTo enter the pizza that has been ordered, press 1\nTo go back press 2");
-
         do {
             int choice = getIntegerInput();
             if (choice == 1) {
                 System.out.println("Please provide pizza number:");
                 int chosenPizzaID = getIntegerInput();
                 System.out.println(getPizzaFromMenu(chosenPizzaID));
+                statisticsArrayList.add(getPizzaFromMenu(chosenPizzaID));
                 System.out.println("When should it be finished by?");
                 Date pizzaFinishTime = getFinishedByTime();
                 Orders nextOrder = new Orders(getPizzaFromMenu(chosenPizzaID), pizzaFinishTime);
@@ -108,23 +106,6 @@ public class OrderSystem {
             }else {
                 System.out.println("Please enter 1 or 2");
             }
-            /*
-            System.out.println("Would you like to enter another order? Press 1 for Yes. 2 for No");
-            int choice2 = getIntegerInput();
-            if (choice2 == 1) {
-                System.out.println("Enter the pizza that has been ordered");
-                int chosenPizzaID = getIntegerInput();
-                System.out.println("When should it be finished by?");
-                Date pizzaFinishTime = getFinishedByTime();
-                Orders nextOrder = new Orders(getPizzaFromMenu(chosenPizzaID),pizzaFinishTime);
-                ordersArrayList.add(nextOrder);
-            } else if (choice2 == 2) {
-                loopChecker = false;
-            } else {
-                System.out.println("Please enter 1 or 2");
-            }
-
-             */
         }while (loopChecker);
     }
     public static void removeOrder() {
@@ -157,9 +138,11 @@ public class OrderSystem {
         }
     }
     public static void printAllOrders() {
-        Pizza[] ordersInArrayList = ordersArrayList.toArray(new Pizza[ordersArrayList.size()]);
-        for (Pizza orders : ordersInArrayList) {
-            System.out.println(orders.toString());
+        Orders[] ordersInArrayList = ordersArrayList.toArray(new Orders[ordersArrayList.size()]);
+        int listing = 1;
+        for (Orders orders : ordersInArrayList) {
+            System.out.println(listing+". "+orders.toString());
+            listing++;
         }
     }
     public static int getIntegerInput() {

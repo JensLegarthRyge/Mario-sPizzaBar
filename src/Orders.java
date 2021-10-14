@@ -13,8 +13,8 @@ public class Orders {
 
     @Override
     public String toString() {
-        return "Orders{" +
-                "pizzasOrdered=" + pizzaOrdered +
-                '}';
+        String minutes ="";
+        minutes=(finishedByTime.getMinutes()).
+        return finishedByTime.getHours()+":"+minutes+pizzaOrdered;
     }
 }
