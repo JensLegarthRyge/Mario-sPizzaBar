@@ -1,19 +1,22 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
+import java.time.*;
+import java.util.*;
+import java.text.*;
+import java.io.*;
 
 public class OrderSystem {
     static Scanner scanner = new Scanner(System.in);
     static boolean validation = true;
+    static LocalDate today = LocalDate.now();
+
     public static void main(String[] args) {
         fillMenuArrayListFromTxtFile();
 
-        chooseUser();
+        //chooseUser();
 
     }
 
+
+    //Primarily Mads's code - Code responsible for navigating the whole system
     public static void chooseUser() {
         String userInfo = "Press 1 for Marios user \nPress 2 for Alfredo's user \nPress 3 to exit program \n";
         System.out.println(userInfo);
@@ -40,7 +43,6 @@ public class OrderSystem {
             }
         } while (validation);
     }
-
     public static void marioProgram() {
 
         String marioInfo = "Press 1 for menu card \nPress 2 for orders list \nPress 3 to go back \n";
@@ -60,7 +62,6 @@ public class OrderSystem {
         } while (!validation);
 
     }
-
     public static void alfredoProgram() {
         String alfredoInfo = "Press 1 to add order \nPress 2 to remove order \nPress 3 to go back \n";
         System.out.println("Welcome Alfredo");
@@ -81,22 +82,31 @@ public class OrderSystem {
 
     }
 
+    //Primarily Christoffer's  code - Code responsible for Alfredos order system
+    static ArrayList<Orders> ordersArrayList = new ArrayList<>();
+    static ArrayList<Orders> bookingKeepingArrayList = new ArrayList<>();
+
+
     public static void addOrder() {
         boolean loopChecker = true;
         Pizza[] pizzasArray = menu.toArray(new Pizza[menu.size()]);
-        printWholePizzaMenu();
-        System.out.println("Enter the pizza that have been ordered");
-        int choice = getIntegerInput();
-        ordersArrayList.add(pizzasArray[choice - 1]);
-        System.out.println(ordersArrayList.toString());
+        printPizzaMenu();
+        System.out.println("Enter the pizza that has been ordered");
+        int chosenPizzaID = getIntegerInput();
+        System.out.println("When should it be finished by?");
+        Date pizzaFinishTime = getFinishedByTime();
+        Orders nextOrder = new Orders(getPizzaFromMenu(chosenPizzaID),pizzaFinishTime);
+        ordersArrayList.add(nextOrder);
         while (loopChecker) {
             System.out.println("Would you like to enter another order? Press 1 for Yes. 2 for No");
             int choice2 = getIntegerInput();
             if (choice2 == 1) {
-                System.out.println("Enter the pizza that have been ordered");
-                int choice3 = getIntegerInput();
-                ordersArrayList.add(pizzasArray[choice3 - 1]);
-                System.out.println(ordersArrayList.toString());
+                System.out.println("Enter the pizza that has been ordered");
+                int chosenPizzaID = getIntegerInput();
+                System.out.println("When should it be finished by?");
+                Date pizzaFinishTime = getFinishedByTime();
+                Orders nextOrder = new Orders(getPizzaFromMenu(chosenPizzaID),pizzaFinishTime);
+                ordersArrayList.add(nextOrder);
             } else if (choice2 == 2) {
                 loopChecker = false;
             } else {
@@ -133,21 +143,30 @@ public class OrderSystem {
             }
         }
     }
-
-    public static int getIntegerInput() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
-    }
-
-    static ArrayList<Pizza> ordersArrayList = new ArrayList<Pizza>();
-    static ArrayList<Orders> bookingKeepingArrayList = new ArrayList<>();
-
-
     public static void printAllOrders() {
         Pizza[] ordersInArrayList = ordersArrayList.toArray(new Pizza[ordersArrayList.size()]);
         for (Pizza orders : ordersInArrayList) {
             System.out.println(orders.toString());
         }
+    }
+    public static int getIntegerInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    public static Date getFinishedByTime(){
+        System.out.println("hh:mm");
+        String dateFromUser = getStringInput();
+
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm yyyy-MM-dd");
+        Date formattedDate = null;
+        try{
+            formattedDate = format.parse(dateFromUser+" "+today);
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+        return formattedDate;
+
     }
 
     //Primarily Jens's code - Code responsible for creating Pizza menu and pulling pizzas from it
@@ -191,10 +210,10 @@ public class OrderSystem {
             }
         }
     }
-    private static String getPizzaFromMenu(int pizzaID){
+    private static Pizza getPizzaFromMenu(int pizzaID){
         //turns menu to an array which we can use Pizza methods on
         Pizza[] pizzasArray = menu.toArray(new Pizza[menu.size()]);
-        return pizzasArray[pizzaID-1].toString();
+        return pizzasArray[pizzaID-1];
     }
     private static void printPizzaMenu(){
         //Prints out all Pizzas on the menu, will also be helpful when getting statistics from a day of sales
@@ -205,5 +224,10 @@ public class OrderSystem {
     }
 
 
+
+    static String getStringInput(){
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
 }
 

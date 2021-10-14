@@ -1,18 +1,20 @@
 import java.util.Arrays;
 import java.util.Date;
 public class Orders {
-    private Pizza[] pizzasOrdered;
+    private Pizza pizzaOrdered;
+    private Date finishedByTime;
 
 
-    public Orders(Pizza[] pizzasOrdered) {
-        this.pizzasOrdered = pizzasOrdered;
+    public Orders(Pizza pizzaOrdered, Date finishedByTime) {
+        this.pizzaOrdered = pizzaOrdered;
+        this.finishedByTime = finishedByTime;
 
     }
 
     @Override
     public String toString() {
         return "Orders{" +
-                "pizzasOrdered=" + Arrays.toString(pizzasOrdered) +
+                "pizzasOrdered=" + pizzaOrdered +
                 '}';
     }
 }
