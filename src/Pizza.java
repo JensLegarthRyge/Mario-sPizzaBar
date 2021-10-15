@@ -11,6 +11,11 @@ public class Pizza {
                 pizzaToppings+
                 "\t\tDKK " + pizzaPrice + ",-";
     }
+    public String modifiedToString() {
+        return pizzaID+". "+
+                pizzaName+" - "+
+                pizzaToppings;
+    }
 
     public Pizza(int pizzaID, String pizzaName, String pizzaToppings, int pizzaPrice) {
         this.pizzaID = pizzaID;

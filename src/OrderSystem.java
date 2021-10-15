@@ -131,7 +131,7 @@ public class OrderSystem {
         for (Double data : visualRepresentation.keySet()) {
             int pizzaID = data.intValue();
             int amountSold = visualRepresentation.get(data).intValue();
-            System.out.println(("You sold " + amountSold + " number "+pizzaID+"\t" + getStars(visualRepresentation.get(data))));
+            System.out.println(("You sold " + amountSold + " number "+getPizzaFromMenu(pizzaID)+"\t" + getStars(visualRepresentation.get(data))));
 
         }
         System.out.println();
