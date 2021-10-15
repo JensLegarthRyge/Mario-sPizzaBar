@@ -8,18 +8,15 @@ import java.util.stream.*;
 
 
 public class OrderSystem {
-    static Scanner scanner = new Scanner(System.in);
     static boolean validation = true;
     static LocalDate today = LocalDate.now();
 
     public static void main(String[] args) {
         fillMenuArrayListFromTxtFile();
         chooseUser();
-
     }
 
-
-    //Primarily Mads's code - Code responsible for navigating the whole system
+    //Primarily Mads's code - Code responsible for statistics and navigating the whole system
     public static void chooseUser() {
         String userInfo = "Press '1' for Mario's Menu\nPress '2' for Alfonso's menu\nPress '3' to exit program";
         System.out.println(userInfo);
@@ -85,7 +82,6 @@ public class OrderSystem {
         }while (!validation);
 
     }
-    //code responsible for statistics
     public static void statistics() {
         boolean loopChecker = true;
         Pizza[] statisticsOnPizzas = statisticsArrayList.toArray(new Pizza[0]);
@@ -131,7 +127,7 @@ public class OrderSystem {
         for (Double data : visualRepresentation.keySet()) {
             int pizzaID = data.intValue();
             int amountSold = visualRepresentation.get(data).intValue();
-            System.out.println(("You sold " + amountSold + " number "+getPizzaFromMenu(pizzaID)+"\t" + getStars(visualRepresentation.get(data))));
+            System.out.println(("You sold " + amountSold + " number "+getPizzaFromMenuWithoutPrice(pizzaID)+"\t" + getStars(visualRepresentation.get(data))));
 
         }
         System.out.println();
@@ -186,7 +182,7 @@ public class OrderSystem {
                     System.out.println("Please enter valid input");
                     removePizza = getIntegerInput();
                 }
-                System.out.println("Pizza removed ✓:" + ordersArrayList.get(removePizza - 1));
+                System.out.println("Pizza removed ✓: " + ordersArrayList.get(removePizza - 1));
                 ordersArrayList.remove(removePizza - 1);
             } else if (choice == 2) {
                 loopChecker = false;
@@ -196,20 +192,20 @@ public class OrderSystem {
         } while (!loopChecker);
     }
     public static void printAllOrders() {
-        Orders[] ordersInArrayList = ordersArrayList.toArray(new Orders[ordersArrayList.size()]);
+        ArrayList<Orders> sortedOrdersArrayList = new ArrayList<Orders>(ordersArrayList);
+        Collections.sort(sortedOrdersArrayList);
+        Orders[] ordersInArray = sortedOrdersArrayList.toArray(new Orders[sortedOrdersArrayList.size()]);
         int listing = 1;
-        for (Orders orders : ordersInArrayList) {
-            System.out.println(listing+". "+orders.toString());
+        for (Orders orders : ordersInArray) {
+            System.out.println(listing + ". " + orders.toString());
             listing++;
         }
         System.out.println();
-    }
+    } //Tweaked sorting by Mads and Jens
     public static int getIntegerInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-
-
 
     //Primarily Jens's code - Code responsible for creating Pizza menu and pulling pizzas from it
     static ArrayList<Pizza> menu = new ArrayList<>();
@@ -282,6 +278,10 @@ public class OrderSystem {
         }
         return formattedDate;
 
+    }
+    private static String getPizzaFromMenuWithoutPrice(int pizzaID){
+        Pizza[] pizzasArray = menu.toArray(new Pizza[menu.size()]);
+        return pizzasArray[pizzaID-1].modifiedToString();
     }
 }
 

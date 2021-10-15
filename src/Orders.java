@@ -1,7 +1,8 @@
 import java.util.Date;
-public class Orders {
-    private Pizza pizzaOrdered;
+public class Orders implements Comparable<Orders>{
     private Date finishedByTime;
+    private Pizza pizzaOrdered;
+
 
 
     public Orders(Pizza pizzaOrdered, Date finishedByTime) {
@@ -12,13 +13,18 @@ public class Orders {
 
     @Override
     public String toString() {
-        int minutes = finishedByTime.getMinutes();
-        StringBuilder stringbuilder = new StringBuilder();
-        if (minutes<10){
-            stringbuilder.append(0).append(minutes);
-        } else
-            stringbuilder.append(minutes);
 
-        return finishedByTime.getHours()+":"+stringbuilder+" - "+pizzaOrdered;
+        int minutes = finishedByTime.getMinutes();
+        StringBuilder stringBuilder = new StringBuilder();
+        if (minutes<10){
+            stringBuilder.append(0).append(minutes);
+        } else
+            stringBuilder.append(minutes);
+        return finishedByTime.getHours()+":"+stringBuilder+" - "+pizzaOrdered;
+    }
+
+    @Override
+    public int compareTo(Orders o) {
+        return finishedByTime.compareTo(o.finishedByTime);
     }
 }
