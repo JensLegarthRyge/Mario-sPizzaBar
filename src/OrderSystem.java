@@ -192,16 +192,21 @@ public class OrderSystem {
         } while (!loopChecker);
     }
     public static void printAllOrders() {
+        //Tweaked sorting by Mads and Jens
+        //Creates copy of ordersArrayList
         ArrayList<Orders> sortedOrdersArrayList = new ArrayList<Orders>(ordersArrayList);
+        //Sorts the copy by Date
         Collections.sort(sortedOrdersArrayList);
+        //Converts arraylist to Orders array
         Orders[] ordersInArray = sortedOrdersArrayList.toArray(new Orders[sortedOrdersArrayList.size()]);
         int listing = 1;
+        //Christoffer - prints the elements in the orders array
         for (Orders orders : ordersInArray) {
             System.out.println(listing + ". " + orders.toString());
             listing++;
         }
         System.out.println();
-    } //Tweaked sorting by Mads and Jens
+    }
     public static int getIntegerInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
