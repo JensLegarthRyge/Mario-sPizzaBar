@@ -172,32 +172,28 @@ public class OrderSystem {
     }
     public static void removeOrder() {
         boolean loopChecker = true;
-        System.out.println("Choose which pizza to remove from order list🧾");
-        System.out.println(ordersArrayList.toString());
-        int choice = getIntegerInput();
-        while (choice >= ordersArrayList.size()+1 || choice <= 0) {
-            System.out.println("Please enter valid input");
-            choice = getIntegerInput();
-        }
-        System.out.println("Pizza removed ✓:" + ordersArrayList.get(choice-1));
-        ordersArrayList.remove(choice - 1);
-        while (loopChecker) {
-            System.out.println("Press '1' to remove another pizza🍕\nPress '2' to go back🔙");
-            int choice2 = getIntegerInput();
-            if (choice2 == 1) {
+        System.out.println();
+        System.out.println("Press '1' to remove pizza🍕\nPress '2' to go back🔙");
+        do {
+            int choice = getIntegerInput();
+            if (choice == 1) {
                 System.out.println("Choose which pizza to remove from order list🧾");
-                System.out.println(ordersArrayList.toString());
-                while (choice2 >= ordersArrayList.size()+1 || choice2 <= 0) {
-                    System.out.println("Please enter valid input");
-                    choice2 = getIntegerInput();
+                for(int i = 0; i < ordersArrayList.size(); i++) {
+                    System.out.println(i+1 + " " + ordersArrayList.get(i).toString());
                 }
-                ordersArrayList.remove(choice - 1);
-            } else if (choice2 == 2) {
+                int removePizza = getIntegerInput();
+                while (removePizza >= ordersArrayList.size() + 1 || removePizza <= 0) {
+                    System.out.println("Please enter valid input");
+                    removePizza = getIntegerInput();
+                }
+                System.out.println("Pizza removed ✓:" + ordersArrayList.get(removePizza - 1));
+                ordersArrayList.remove(removePizza - 1);
+            } else if (choice == 2) {
                 loopChecker = false;
             } else {
                 System.out.println("Please enter '1' or '2'");
             }
-        }
+        } while (!loopChecker);
     }
     public static void printAllOrders() {
         Orders[] ordersInArrayList = ordersArrayList.toArray(new Orders[ordersArrayList.size()]);
