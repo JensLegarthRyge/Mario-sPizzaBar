@@ -21,9 +21,7 @@ public class OrderSystem {
         //A do while loop that navigates through the different programs
         String userInfo = "Press '1' for Mario's Menu\nPress '2' for Alfonso's menu\nPress '3' to exit program";
         System.out.println(userInfo);
-
         int marioOrAlfredo;
-
         do {
             marioOrAlfredo = getIntegerInput();
             validation = false;
@@ -233,6 +231,10 @@ public class OrderSystem {
     }
     public static int getIntegerInput() {
         Scanner scanner = new Scanner(System.in);
+        while (!scanner.hasNextInt()) {
+            System.out.println("Please enter a valid input");
+            scanner.next();
+        }
         return scanner.nextInt();
     }
 
@@ -292,6 +294,11 @@ public class OrderSystem {
     }
     static String getStringInput(){
         Scanner scanner = new Scanner(System.in);
+        //While loop which ensures that the user inputs proper format instead of crashing
+        while (!scanner.hasNextLine()) {
+            System.out.println("Please enter valid input");
+            scanner.next();
+        }
         return scanner.nextLine();
     }
     public static Date getFinishedByTime(){
