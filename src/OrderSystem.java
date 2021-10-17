@@ -152,8 +152,10 @@ public class OrderSystem {
     }
 
     //Primarily Christoffer's  code - Code responsible for Alfredos order system
+    //We use to arraylists to store orders and statistics
     static ArrayList<Orders> ordersArrayList = new ArrayList<>();
     static ArrayList<Pizza> statisticsArrayList = new ArrayList<>();
+    //Method to add orders
     public static void addOrder() {
         boolean loopChecker = true;
         printPizzaMenu();
@@ -163,14 +165,23 @@ public class OrderSystem {
             if (choice == 1) {
                 System.out.println("Please provide pizza number🔢:");
                 int chosenPizzaID = getIntegerInput();
+                while (chosenPizzaID > 38 || chosenPizzaID <= 0)  {
+                    System.out.println("Please provide a valid pizza number🔢:");
+                    chosenPizzaID = getIntegerInput();
+                }
                 System.out.println(getPizzaFromMenu(chosenPizzaID));
+                //Add the chosen pizza from the pizza menu to the statistics arraylist
                 statisticsArrayList.add(getPizzaFromMenu(chosenPizzaID));
                 System.out.println("When should it be finished by?⏲");
                 Date pizzaFinishTime = getFinishedByTime();
+                //Instantiate a new order based on what pizza alfredo chose from the menu and when it is to be finished by
                 Orders nextOrder = new Orders(getPizzaFromMenu(chosenPizzaID), pizzaFinishTime);
                 ordersArrayList.add(nextOrder);
+                //Sorts order arraylist by time
+                Collections.sort(ordersArrayList);
                 System.out.println("Press '1' to add another order\nPress '2' to go back🔙");
             } else if (choice == 2) {
+                //exits loop
                 loopChecker = false;
             }else {
                 System.out.println("Please enter '1' or '2'");
@@ -178,6 +189,7 @@ public class OrderSystem {
         }while (loopChecker);
     }
     public static void removeOrder() {
+        //Method to remove orders
         boolean loopChecker = true;
         System.out.println();
         System.out.println("Press '1' to remove pizza🍕\nPress '2' to go back🔙");
@@ -194,6 +206,7 @@ public class OrderSystem {
                     removePizza = getIntegerInput();
                 }
                 System.out.println("Pizza removed ✓: " + ordersArrayList.get(removePizza - 1));
+                //Removes pizza from the orders Arraylist
                 ordersArrayList.remove(removePizza - 1);
             } else if (choice == 2) {
                 loopChecker = false;
