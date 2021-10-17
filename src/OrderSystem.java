@@ -18,6 +18,7 @@ public class OrderSystem {
 
     //Primarily Mads's code - Code responsible for statistics and navigating the whole system
     public static void chooseUser() {
+        //A do while loop that navigates through the different programs
         String userInfo = "Press '1' for Mario's Menu\nPress '2' for Alfonso's menu\nPress '3' to exit program";
         System.out.println(userInfo);
 
@@ -44,6 +45,7 @@ public class OrderSystem {
         } while (validation);
     }
     public static void marioProgram() {
+        //A menu to navigate through the options in the marioProgram
         String marioInfo = "Press '1' for menu card🧾\nPress '2' for orders list🛒\nPress '3' to see statistics📊\nPress '4' to go back🔙";
         System.out.println("\nWelcome Mario👨🏻‍🍳");
         do {
@@ -64,6 +66,7 @@ public class OrderSystem {
 
     }
     public static void alfredoProgram() {
+        //A menu to navigate through the options in the alfredoProgram
         String alfredoInfo = "Press '1' to add order🛒\nPress '2' to remove order␡\nPress '3' to go back🔙";
         System.out.println("\nWelcome Alfonso🤵🏾");
         do {
@@ -83,18 +86,24 @@ public class OrderSystem {
 
     }
     public static void statistics() {
+        //A method that takes and process the elements from statisticsArrayList
         boolean loopChecker = true;
+        //statisticsArrayList is converted back into a Pizza array.
         Pizza[] statisticsOnPizzas = statisticsArrayList.toArray(new Pizza[0]);
+        //A double array used for DoubleSummaryStatistics
         double dataset[] = new double[statisticsOnPizzas.length];
-
+        //This for loop takes the prices of each pizza in the statisticsOnPizzas array and puts it in the double array
         for (int i = 0; i < statisticsOnPizzas.length; i++) {
             dataset[i] = statisticsOnPizzas[i].getPizzaPrice();
         }
+        //DoubleSummaryStatistics is an object made for collecting statistics such as count, sum, average, min, max etc.
+        //Here DoubleSummaryStatistics is used with Stream to filter the objects of dataset
         DoubleSummaryStatistics stats = DoubleStream.of(dataset).summaryStatistics();
         double amountOfPizzasSold = stats.getCount();
         double sumOfPizzaRevenue = stats.getSum();
 
-
+        //Do while loop that gives the options to either print todays sales (amountOfPizzasSold) and the amount of revenue
+        //or print the most popular pizzas in a visualRepresentation.
         do {
             System.out.println("\nTo see revenue from today's sales, press '1'💰\n" +
                     "To see the most popular pizza today, press '2'🍕\nTo go back, press '3'🔙");
@@ -133,6 +142,8 @@ public class OrderSystem {
         System.out.println();
     }
     public static String getStars (long number) {
+        //A method that creates a star that are printed to visualRepresentation in the mostPopularPizza method.
+        //The star is printed for the amount of times a certain pizza is ordered.
         String output = "";
         for (int i = 1; i <= number; i++) {
             output += "⭐️";
